@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+       <script>
+    $("#table_stat").ready(function(){
+               requests = setInterval(function(){
+                   $.ajax({
+                   type:'post',
+                   url:'{% url 'stat_view'%}',
+                   data: {'data':'statistics', csrfmiddlewaretoken: "{{ csrf_token }}"},
+                   success:
+                       function loadTable(response) {
+                       var table = response.tabl[0];
+                       table.sort(function (a, b) {  return a.time_start < b.time_start; });
+                       var fields = ['time_start', 'curr_state'];
+                           var rows = '';
+                           $.each(table, function(index, item) {
+                               var row = '<tr>';
+                               $.each(fields, function(index, field) {
+                                   row += '<td>' + item[field+''] + '</td>';
+                               });
+                               rows += row + '<tr>';
+                           });
+                           $('#table_stat').html(rows);
+{#                           console.log()#}
+                       }
+                   })
+               }, 1000);
+            });
+    </script>
+    <h1>Статистика</h1>
+    <table id="table_stat">
+    <tbody></tbody>
+    </table>
+{% endblock %}

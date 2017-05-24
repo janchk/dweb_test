@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<html lang="en">
+{% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $("#start_task").click(function () {
+                $.ajax({
+                    type:'post',
+                    url:'{% url 'rqst_hndlr'%}',
+                    data: {'data': 'start', csrfmiddlewaretoken: "{{ csrf_token }}"},
+                    success:{}
+                })
+            });
+
+            $("#view_statistics").click(function () {
+                window.location.href = '/statistics'
+            });
+        });
+    $().ready(function (){
+        if (document.getElementById('table_stat') != null) {
+
+        }
+    })
+    </script>
+{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>Тест</title>
+</head>
+<body>
+
+{% block content %}
+
+{% endblock %}
+</body>
+</html>
