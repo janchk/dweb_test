@@ -20,7 +20,7 @@
                                });
                                rows += row + '<tr>';
                            });
-                           $('#table_stat').html(rows);
+                           $('#table_stat'+ ' tbody').html(rows);
 {#                           console.log()#}
                        }
                    })
@@ -29,6 +29,13 @@
     </script>
     <h1>Статистика</h1>
     <table id="table_stat">
-    <tbody></tbody>
+    <tbody>
+    <thead>
+        <tr>
+            <td>Время создания</td>
+            <td>Статус задачи</td>
+        </tr>
+    </thead>
+    </tbody>
     </table>
 {% endblock %}
